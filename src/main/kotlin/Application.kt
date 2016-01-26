@@ -5,23 +5,28 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 
 
 /**
- * Spring Boot looks for a public static main method, so we define this in Kotlin using the @JvmStatic annotation.
- * For this, we create a standard Application class and define a companion object inside where we can then create a
- * function annotated with @JvmStatic.
+ * Spring Boot looks for a public static main method.
  *
- * Note: JvmStatic is an annotation in Kotlin which is used for interoperability with Java,
- * so that the resulting method is defined as static when called from Java.
+ * In Java, the main() method of a Spring Boot application is conventionally defined within
+ * the annotated application class. This is because Java does NOT support top-level methods.
+ * In Kotlin, however, we DO have top-level functions.
+ *
+ * In Kotlin, top-level functions are compiled into static members of an automatically-generated class.
+ * The name of this class is derived from the name of the source file.
+ * The top-level function defined in this file would be defined in a class named ApplicationKt.
+ *
+ * For the simplified Spring main entry point below to work, you must set the
+ * springBoot.mainClass property in your build.gradle file to look for this main function.
  *
  * The other change needed for Spring Boot is to mark the class as open.
- * Spring boot @Configuration classes cannot be final. Classes in Kotlin are final by default without the open modifier.
+ * Spring boot @Configuration classes cannot be final.
+ * Classes in Kotlin are final by default without the open modifier.
  */
 @SpringBootApplication
-open class Application {
+open class Application
 
-    companion object {
-        @JvmStatic public fun main(args: Array<String>) {
-            SpringApplication.run(Application::class.java, *args)
-        }
-    }
-
+fun main(args: Array<String>) {
+    SpringApplication.run(Application::class.java, *args)
 }
+
+

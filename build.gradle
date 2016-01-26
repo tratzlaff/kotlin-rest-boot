@@ -30,6 +30,10 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web'
 }
 
+springBoot {
+    mainClass = 'com.tratzlaff.example.ApplicationKt'
+}
+
 // The corresponding sourceSets property should be updated if not using the default convention
 sourceSets {
     //main.kotlin.srcDirs += 'src/main/kotlin'
