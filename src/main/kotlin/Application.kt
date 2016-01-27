@@ -26,6 +26,19 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 open class Application
 
 fun main(args: Array<String>) {
+
+    /*
+       The most basic reflection feature is getting the runtime reference to a Kotlin class.
+       To obtain the reference to a statically known Kotlin class, you can use the class literal syntax:
+       val c = MyClass::class
+       The reference is a value of type KClass.
+       A Kotlin class reference is not the same as a Java class reference.
+       To obtain a Java class reference, use the .java property on a KClass instance.
+       https://kotlinlang.org/docs/reference/reflection.html
+
+       Prefix an array with * (spread operator) to pass it's contents to a function.
+       https://kotlinlang.org/docs/reference/functions.html#variable-number-of-arguments-varargs
+     */
     SpringApplication.run(Application::class.java, *args)
 }
 
