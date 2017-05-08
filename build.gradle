@@ -1,21 +1,19 @@
-/**
- * https://kotlinlang.org/docs/reference/using-gradle.html
- */
-
 buildscript {
-
-    ext.kotlin_version = '1.0.0-beta-4589'
-    ext.spring_boot_version = '1.3.2.RELEASE'
+    ext.spring_boot_version = '1.5.3.RELEASE'
 
     repositories {
         mavenCentral()
     }
 
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.springframework.boot:spring-boot-gradle-plugin:$spring_boot_version"
     }
+}
 
+// https://kotlinlang.org/docs/reference/using-gradle.html
+// http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.jetbrains.kotlin%22%20AND%20a%3A%22kotlin-gradle-plugin%22
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "1.1.2-2"
 }
 
 apply plugin: 'kotlin'
@@ -26,7 +24,10 @@ repositories {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    // Starting with Kotlin 1.1.2, the dependencies with group org.jetbrains.kotlin
+    // are by default resolved with the version taken from the applied plugin.
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8"
+
     compile 'org.springframework.boot:spring-boot-starter-web'
 }
 
@@ -43,5 +44,5 @@ sourceSets {
 
 // https://docs.gradle.org/current/userguide/gradle_wrapper.html
 task wrapper(type: Wrapper) {
-    gradleVersion = "2.10"
+    gradleVersion = "3.5"
 }
